@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import logo from "./../images/logo.png";
 import { teenused } from "./../consts";
 import fs from "fs";
 import path from "path";
@@ -11,12 +10,12 @@ import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 export default function Home({ posts }: { posts: Post[] }) {
-  const [sending,setSending ] =useState(false)
+  const [sending, setSending] = useState(false);
   const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = async (e: any) => {
     e.preventDefault();
-    console.log("sending")
+    console.log("sending");
     if (sending) return;
     setSending(true);
     try {
@@ -35,16 +34,6 @@ export default function Home({ posts }: { posts: Post[] }) {
   };
   return (
     <main>
-      <nav className={styles.nav}>
-        <Image src={logo} alt="logo" height={80} width={180}></Image>
-        <div>
-          <a href="#teenused">Teenused</a>
-          <a href="#blogi">Blogi</a>
-          <a href="#tood">Tehtud tood</a>
-          <a href="#kontakt">Kontakt</a>
-        </div>
-      </nav>
-
       <div className={styles.top} id="home">
         <div className={styles.topContent}>
           <h1>Ostame Lõuna-Eestis kuusepalki</h1>
@@ -66,7 +55,7 @@ export default function Home({ posts }: { posts: Post[] }) {
         </div>
       </div>
 
-      <div className={styles.blog} id="blogi">
+      <div className={styles.blog} id="blog">
         <h2>Viimased uudised</h2>
         <div>
           {posts.slice(0, 3).map((post: any, i: number) => (

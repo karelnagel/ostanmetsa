@@ -5,19 +5,30 @@ import path from "path";
 import matter from "gray-matter";
 import Head from "next/head";
 import { Post } from "../../interfaces";
-
+import styles from "../../styles/Post.module.css";
+import Image from "next/image";
 const components = {};
 
-export default function PostPage({ title, date, mdxSource }: Post) {
+export default function PostPage({ title, date, mdxSource, thumbnailUrl }: Post) {
   return (
-    <div>
+    <>
       <Head>
         <title>{title}</title>
       </Head>
-      <h3>{title}</h3>
-      <h3>{date}</h3>
-      <MDXRemote {...mdxSource} components={components} />
-    </div>
+      <main>
+        <div className={styles.top} id="home">
+          <div className={styles.topContent}>
+            <h1>{title}</h1>
+            <div>
+              <Image src={thumbnailUrl!} alt={title} layout="fill"></Image>
+            </div>
+          </div>
+        </div>
+        <article className={styles.content}>
+          <MDXRemote {...mdxSource} components={components} />
+        </article>
+      </main>
+    </>
   );
 }
 
