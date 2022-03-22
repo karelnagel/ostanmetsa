@@ -6,10 +6,9 @@ import matter from "gray-matter";
 import Head from "next/head";
 import { Post } from "../../interfaces";
 import styles from "../../styles/Post.module.css";
-import Image from "next/image";
 const components = {};
 
-export default function PostPage({ title, description, mdxSource, thumbnailUrl, tags }: Post) {
+export default function TeenusedPage({ title, description, mdxSource, tags }: Post) {
   return (
     <>
       <Head>
@@ -19,12 +18,7 @@ export default function PostPage({ title, description, mdxSource, thumbnailUrl, 
       </Head>
       <main>
         <div className={styles.top} id="home">
-          <div className={styles.topContent}>
-            <h1>{title}</h1>
-            <div>
-              <Image src={thumbnailUrl!} alt={title} layout="fill"></Image>
-            </div>
-          </div>
+          <h1>{title}</h1>
         </div>
         <article className={styles.content}>
           <MDXRemote {...mdxSource} components={components} />
@@ -35,7 +29,7 @@ export default function PostPage({ title, description, mdxSource, thumbnailUrl, 
 }
 
 export const getStaticPaths = async () => {
-  const files = fs.readdirSync(path.join("posts", "blog"));
+  const files = fs.readdirSync(path.join("posts", "teenused"));
   const paths = files.map((filename) => ({
     params: {
       slug: filename.replace(".mdx", ""),
@@ -49,7 +43,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params: { slug } }: { params: { slug: string } }): Promise<{ props: Post }> => {
-  const markdownWithMeta = fs.readFileSync(path.join("posts", "blog", slug + ".mdx"), "utf-8");
+  const markdownWithMeta = fs.readFileSync(path.join("posts", "teenused", slug + ".mdx"), "utf-8");
 
   const { data: frontMatter, content } = matter(markdownWithMeta);
   const mdxSource = await serialize(content);

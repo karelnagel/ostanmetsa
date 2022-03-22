@@ -31,9 +31,9 @@ export default function Blog({ posts }: { posts: Post[] }) {
   );
 }
 export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join("posts"));
+  const files = fs.readdirSync(path.join("posts","blog"));
   const posts = files.map((filename) => {
-    const markdownWithMeta = fs.readFileSync(path.join("posts", filename), "utf-8");
+    const markdownWithMeta = fs.readFileSync(path.join("posts","blog", filename), "utf-8");
     const { data } = matter(markdownWithMeta);
     return {
       ...data,

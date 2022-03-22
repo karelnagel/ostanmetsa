@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { teenused } from "./../consts";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -8,11 +7,11 @@ import { Post } from "../interfaces";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+const teenusedFailid = ["metsa_ost", "metsa_muuk", "puidu_muuk", "veoteenus", "metsa_ulestootamine", "metsa_majandamine"];
 
-export default function Home({ posts }: { posts: Post[] }) {
+export default function Home({ posts, teenused }: { posts: Post[]; teenused: Post[] }) {
   const [sending, setSending] = useState(false);
   const form = useRef<HTMLFormElement>(null);
-
   const sendEmail = async (e: any) => {
     e.preventDefault();
     console.log("sending");
@@ -46,8 +45,8 @@ export default function Home({ posts }: { posts: Post[] }) {
         <h2>Teenused</h2>
         <div>
           {teenused.map((teenus, i) => (
-            <a key={i} className={styles.teenus} href={"/"}>
-              <Image className={styles.teenusedImage} src={teenus.image} alt={teenus.title}></Image>
+            <a key={i} className={styles.teenus} href={`/teenused/${teenus.slug}`}>
+              <Image className={styles.teenusedImage} src={teenus.thumbnailUrl!} alt={teenus.title} layout="fill"></Image>
               <h3 className={styles.title}>{teenus.title}</h3>
               <p className={styles.description}>{teenus.description}</p>
             </a>
@@ -91,18 +90,28 @@ export default function Home({ posts }: { posts: Post[] }) {
 }
 
 export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join("posts"));
+  const files = fs.readdirSync(path.join("posts","blog"));
   const posts = files.map((filename) => {
-    const markdownWithMeta = fs.readFileSync(path.join("posts", filename), "utf-8");
+    const markdownWithMeta = fs.readFileSync(path.join("posts","blog", filename), "utf-8");
     const { data } = matter(markdownWithMeta);
     return {
       ...data,
       slug: filename.split(".")[0],
     };
   });
+
+  const teenused = teenusedFailid.map((filename) => {
+    const markdownWithMeta = fs.readFileSync(path.join("posts", "teenused", filename + ".mdx"), "utf-8");
+    const { data } = matter(markdownWithMeta);
+    return {
+      ...data,
+      slug: filename,
+    };
+  });
   return {
     props: {
       posts,
+      teenused
     },
   };
 };
