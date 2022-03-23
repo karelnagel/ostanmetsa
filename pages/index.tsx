@@ -46,7 +46,9 @@ export default function Home({ posts, teenused }: { posts: Post[]; teenused: Pos
         <div>
           {teenused.map((teenus, i) => (
             <a key={i} className={styles.teenus} href={`/teenused/${teenus.slug}`}>
-              <Image className={styles.teenusedImage} src={teenus.thumbnailUrl!} alt={teenus.title} layout="fill"></Image>
+              <div>
+                <Image className={styles.teenusedImage} src={teenus.thumbnailUrl!} alt={teenus.title} layout="fill"></Image>
+              </div>
               <h3 className={styles.title}>{teenus.title}</h3>
               <p className={styles.description}>{teenus.description}</p>
             </a>
@@ -90,9 +92,9 @@ export default function Home({ posts, teenused }: { posts: Post[]; teenused: Pos
 }
 
 export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join("posts","blog"));
+  const files = fs.readdirSync(path.join("posts", "blog"));
   const posts = files.map((filename) => {
-    const markdownWithMeta = fs.readFileSync(path.join("posts","blog", filename), "utf-8");
+    const markdownWithMeta = fs.readFileSync(path.join("posts", "blog", filename), "utf-8");
     const { data } = matter(markdownWithMeta);
     return {
       ...data,
@@ -111,7 +113,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       posts,
-      teenused
+      teenused,
     },
   };
 };
