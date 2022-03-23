@@ -3,34 +3,30 @@ import { MDXRemote } from "next-mdx-remote";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import Head from "next/head";
 import { Post } from "../../interfaces";
 import styles from "../../styles/Post.module.css";
 import Image from "next/image";
+import Layout from "../../components/Layout";
 const components = {};
 
 export default function PostPage({ title, description, mdxSource, thumbnailUrl, tags }: Post) {
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="keywords" content={tags?.toString()} />
-      </Head>
-      <main>
-        <div className={styles.top} id="home">
-          <div className={styles.topContent}>
-            <h1>{title}</h1>
-            <div>
-              <Image src={thumbnailUrl!} alt={title} layout="fill"></Image>
-            </div>
+    <Layout
+      title={title}
+      description={description}
+      keywords={tags?.toString()}
+      top={
+        <div className={styles.topContent}>
+          <h1>{title}</h1>
+          <div>
+            <Image src={thumbnailUrl!} alt={title} layout="fill"></Image>
           </div>
         </div>
-        <article className={styles.content}>
-          <MDXRemote {...mdxSource} components={components} />
-        </article>
-      </main>
-    </>
+      }
+    >
+      <MDXRemote {...mdxSource} components={components} />
+    </Layout>
+    
   );
 }
 

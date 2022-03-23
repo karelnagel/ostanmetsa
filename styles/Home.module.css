@@ -141,37 +141,5 @@
   cursor: pointer;
 }
 
-.contact {
-  padding: 30px 0;
-  text-align: center;
-}
-.contact > form {
-  max-width: 1000px;
-  margin: 30px auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-.contact input,
-.contact textarea {
-  width: 400px;
-  margin: 5px;
-  border-radius: 5px;
-  border: 1px solid black;
-  padding: 10px;
-  font-size: 20px;
-  text-align: center;
-}
-.contact button {
-  margin-top: 3rem;
-  color: black;
-  background: none;
-  border: 3px solid black;
-  border-radius: 0.3em;
-  font-size: 1.5rem;
-  padding: 0.3em 1em;
-  cursor: pointer;
-}
 @media (max-width: 600px) {
 }

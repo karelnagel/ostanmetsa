@@ -12,10 +12,9 @@ export function Header() {
         </a>
       </Link>
       <div>
-        <Link href="/#teenused">Teenused</Link>
         <Link href="/blog">Blogi</Link>
-        <Link href="/#tood">Tehtud tood</Link>
-        <Link href="/#kontakt">Kontakt</Link>
+        <Link href="/tood">Tehtud tood</Link>
+        <Link href="#kontakt">Kontakt</Link>
       </div>
     </nav>
   );

@@ -10,27 +10,7 @@ import emailjs from "@emailjs/browser";
 const teenusedFailid = ["metsa_ost", "metsa_muuk", "puidu_muuk", "veoteenus", "metsa_ulestootamine", "metsa_majandamine"];
 
 export default function Home({ posts, teenused }: { posts: Post[]; teenused: Post[] }) {
-  const [sending, setSending] = useState(false);
-  const form = useRef<HTMLFormElement>(null);
-  const sendEmail = async (e: any) => {
-    e.preventDefault();
-    console.log("sending");
-    if (sending) return;
-    setSending(true);
-    try {
-      const result = await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID!,
-        form.current!,
-        process.env.NEXT_PUBLIC_USER_ID
-      );
-      console.log(result.text);
-      form.current?.reset();
-    } catch (e) {
-      console.log(e);
-    }
-    setSending(false);
-  };
+  
   return (
     <main>
       <div className={styles.top} id="home">
@@ -72,21 +52,6 @@ export default function Home({ posts, teenused }: { posts: Post[]; teenused: Pos
           <a className={styles.blogButton}>Loe rohkem</a>
         </Link>
       </div>
-
-      <div id="kontakt" className={styles.contact}>
-        <h2 className={styles.sectionTitle}>Kontakt</h2>
-
-        <form ref={form} onSubmit={sendEmail}>
-          <input type="text" placeholder="Nimi" name="name" />
-          <input type="mail" placeholder="E-post" name="email" required />
-          <textarea placeholder="Sõnum" name="message" required></textarea>
-          <button className="button" type="submit">
-            {sending ? "Saadan ..." : "Saada"}
-          </button>
-        </form>
-      </div>
-
-      <footer className={styles.footer}></footer>
     </main>
   );
 }

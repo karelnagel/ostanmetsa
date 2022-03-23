@@ -3,28 +3,16 @@ import { MDXRemote } from "next-mdx-remote";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import Head from "next/head";
 import { Post } from "../../interfaces";
-import styles from "../../styles/Post.module.css";
+import React from "react";
+import Layout from "../../components/Layout";
 const components = {};
 
 export default function TeenusedPage({ title, description, mdxSource, tags }: Post) {
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="keywords" content={tags?.toString()} />
-      </Head>
-      <main>
-        <div className={styles.top} id="home">
-          <h1>{title}</h1>
-        </div>
-        <article className={styles.content}>
-          <MDXRemote {...mdxSource} components={components} />
-        </article>
-      </main>
-    </>
+    <Layout title={title} description={description} keywords={tags?.toString()} top={<h1>{title}</h1>}>
+      <MDXRemote {...mdxSource} components={components} />
+    </Layout>
   );
 }
 

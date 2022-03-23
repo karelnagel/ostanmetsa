@@ -1,17 +1,4 @@
-.top {
-  width: 100%;
-  min-height: 40vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  background: url("/bg.jpeg") rgba(0, 0, 0, 0.2);
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-.top h1 {
-  color: white;
-  text-transform: uppercase;
-}
+
 .posts {
   max-width: 1000px;
   margin: auto;

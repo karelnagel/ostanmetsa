@@ -5,13 +5,11 @@ import matter from "gray-matter";
 import { Post } from "../../interfaces";
 import Link from "next/link";
 import Image from "next/image";
+import Layout from "../../components/Layout";
 
 export default function Blog({ posts }: { posts: Post[] }) {
   return (
-    <main className={styles.blog}>
-      <div className={styles.top}>
-        <h1>Blogi posititused ja uudised</h1>
-      </div>
+    <Layout top={<h1>Blogi posititused ja uudised</h1>}>
       <div className={styles.posts}>
         {posts.map((post, i) => (
           <Link key={i} href={`/blog/${post.slug}`}>
@@ -27,13 +25,13 @@ export default function Blog({ posts }: { posts: Post[] }) {
           </Link>
         ))}
       </div>
-    </main>
+    </Layout>
   );
 }
 export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join("posts","blog"));
+  const files = fs.readdirSync(path.join("posts", "blog"));
   const posts = files.map((filename) => {
-    const markdownWithMeta = fs.readFileSync(path.join("posts","blog", filename), "utf-8");
+    const markdownWithMeta = fs.readFileSync(path.join("posts", "blog", filename), "utf-8");
     const { data } = matter(markdownWithMeta);
     return {
       ...data,

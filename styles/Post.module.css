@@ -1,16 +1,4 @@
-.top {
-  width: 100%;
-  min-height: 40vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  background: url("/bg.jpeg") rgba(0, 0, 0, 0.2);
-  background-size: cover;
-  background-blend-mode: multiply;
-  color: white;
-  font-size: 18px;
-  text-transform: uppercase;
-}
+
 .topContent {
   max-width: 1000px;
   width: 100%;
@@ -28,11 +16,4 @@
 }
 .topContent > div img {
   object-fit: cover;
-}
-
-.content {
-  margin: 50px auto;
-  max-width: 65ch;
-  font-size: 18px;
-  line-height: 22px;
 }
