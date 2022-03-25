@@ -7,9 +7,11 @@ export default function Meist() {
       {tood.map(({ tood, year }, i) => (
         <div key={i}>
           <h3>Mõned näited meie tööst ja konkurentsivõimest {year} aastal:</h3>
+          <ul>
           {tood.map((too, i) => (
-            <ul key={i}>{`${too.location} (${too.county}), ${too.types.join(" ja ")} ost, ${too.size ? too.size+"tm, ":""} müüja ${too.seller}`}</ul>
+            <li key={i}>{`${too.location} (${too.county}), ${too.types.join(" ja ")} ost, ${too.size ? too.size+"tm, ":""} müüja ${too.seller}`}</li>
           ))}
+          </ul>
         </div>
       ))}
     </Layout>

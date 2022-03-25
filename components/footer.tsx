@@ -38,7 +38,7 @@ export function Footer() {
           <input type="mail" placeholder="E-post" name="email" required />
           <textarea placeholder="Sõnum" name="message" required></textarea>
           <button className="button" type="submit">
-            {sending ? "Saadan ..." : "Saada"}
+            {sending ? "Saadan..." : "Saada"}
           </button>
         </form>
       </div>
