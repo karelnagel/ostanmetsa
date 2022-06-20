@@ -8,7 +8,7 @@ export default function Meist() {
         {works.map(({ work, year }, i) => (
           <div key={i}>
             <h3 className="font-bold text-xl">Mõned näited meie tööst ja konkurentsivõimest {year} aastal:</h3>
-            <ul className="list-disc ml-10 text-lg">
+            <ul className=" text-lg">
               {work.map((too, i) => (
                 <li key={i}>{`${too.location} (${too.county}), ${too.types.join(" ja ")} ost, ${too.size ? too.size + "tm, " : ""} müüja ${
                   too.seller

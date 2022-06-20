@@ -10,7 +10,7 @@ import { getMDXData, getMDXPaths } from "../../functions/MDX";
 export default function Blog({ posts }: { posts: MDXData[] }) {
   return (
     <Layout top={<h1>Blogi posititused ja uudised</h1>}>
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid grid-cols-2  md:grid-cols-3 gap-3 md:gap-10">
         {posts.map((post, i) => (
           <Link key={i} href={`/blog/${post.slug}`} passHref>
             <div className="flex flex-col h-60 shadow-md shadow-gray-400 rounded-lg relative group overflow-hidden hover:scale-110 cursor-pointer duration-200">

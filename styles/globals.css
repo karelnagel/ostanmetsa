@@ -10,8 +10,8 @@
   .mdx p {
     @apply text-lg;
   }
-  .mdx ul {
-    @apply list-disc;
+  ul {
+    @apply list-disc ml-6;
   }
   /* Select messes up header otherwise */
   body {
@@ -21,6 +21,9 @@
     @apply uppercase font-bold cursor-pointer text-white bg-primary rounded-lg py-3 px-4 hover:scale-105 hover:bg-cyan-500 duration-300 ease-in-out;
   }
   .bg-gradient-primary {
-    @apply  bg-gradient-to-tr from-green-400 to-green-100;
+    @apply bg-gradient-to-tr from-green-400 to-green-100;
+  }
+  .h2 {
+    @apply text-xl md:text-3xl font-bold uppercase;
   }
 }

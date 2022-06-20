@@ -21,10 +21,10 @@ export default function Layout({
         {keywords &&<meta name="keywords" content={keywords} />}
       </Head>
       <main className="">
-        <div className="bg-light h-96 bg-cover flex flex-col justify-end items-center font-bold uppercase text-primary text-3xl p-6" id="home">
+        <div className="bg-light h-52 md:h-96 bg-cover flex flex-col justify-end items-center font-bold uppercase text-primary text-xl md:text-3xl p-6" id="home">
           {top}
         </div>
-        <article className="m-auto max-w-screen-lg px-2 py-10 flex flex-col items-center">{children}</article>
+        <article className="m-auto max-w-screen-lg px-2 py-4 md:py-10 flex flex-col items-center">{children}</article>
       </main>
     </>
   );

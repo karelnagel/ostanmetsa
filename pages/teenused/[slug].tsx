@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function TeenusedPage({ data, content, others }: MDXPage) {
   return (
     <Layout title={data.title} description={data.description} keywords={data.tags?.toString()} top={<h1>{data.title}</h1>}>
-      <div className="flex space-x-6 items-start w-full">
+      <div className="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-6 items-start w-full">
         <div className="basis-3/4 mdx w-full">
           <MDXRemote {...content} />
         </div>
