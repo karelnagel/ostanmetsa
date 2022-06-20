@@ -1,52 +1,34 @@
 import logo from "./../images/logo.png";
 import Image from "next/image";
-import styles from "../styles/Footer.module.css";
-import { useRef, useState } from "react";
-
-import emailjs from "@emailjs/browser";
+import { config } from "../consts";
+import Link from "next/link";
 
 export function Footer() {
-  const [sending, setSending] = useState(false);
-  const form = useRef<HTMLFormElement>(null);
-  const sendEmail = async (e: any) => {
-    e.preventDefault();
-    console.log("sending");
-    if (sending) return;
-    setSending(true);
-    try {
-      const result = await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID!,
-        form.current!,
-        process.env.NEXT_PUBLIC_USER_ID
-      );
-      console.log(result.text);
-      form.current?.reset();
-    } catch (e) {
-      console.log(e);
-    }
-    setSending(false);
-  };
-  
   return (
-    <footer>
-      <div id="kontakt" className={styles.contact}>
-        <h2 className={styles.sectionTitle}>Kontakt</h2>
-
-        <form ref={form} onSubmit={sendEmail}>
-          <input type="text" placeholder="Nimi" name="name" />
-          <input type="mail" placeholder="E-post" name="email" required />
-          <textarea placeholder="Sõnum" name="message" required></textarea>
-          <button className="button" type="submit">
-            {sending ? "Saadan..." : "Saada"}
-          </button>
-        </form>
-      </div>
-      <div className={styles.footer}>
+    <footer className="mt-auto bg-main bg-cover ">
+      <div className="bg-black bg-opacity-30 px-10 py-20 grid grid-cols-3 items-start justify-items-center text-lg">
         <div>
-          <h3>Ostanmetsa.ee</h3>
-          <Image src={logo} alt="logo"></Image>
+          <h2 className="uppercase font-bold  text-center mb-4 text-xl text-primary">Meist lähemalt</h2>
+          <p>
+            Oleme noor firma kuid kasvame jõudsalt tänu usaldusväärsele koostööle oma koostööpartneritega ja klientidega. Meie eesmärk on majandada
+            metsanduses läbipaistvalt ja ausalt.
+          </p>
         </div>
+        <div className="">
+          <h2 className="uppercase font-bold text-center mb-4 text-xl text-primary">Võta ühendust</h2>
+          <div className="flex flex-col space-y-3 font-bold">
+            <a href={`mailto:${config.email}`}>{config.email}</a>
+            {config.people.map((p, i) => (
+              <a key={i} href={`tel:${p.phone}`}>
+                {p.name}: {p.phone}
+              </a>
+            ))}
+            <a href="https://goo.gl/maps/jqmyP2Pqc4ELVpng8">Põllu 2 Võru linn</a>
+          </div>
+        </div>
+        <Link href="#" passHref>
+          <button className="btn">Tagasi üles</button>
+        </Link>
       </div>
     </footer>
   );

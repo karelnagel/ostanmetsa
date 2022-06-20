@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
       </Head>
-      <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <div className="h-[100vh] w-full flex flex-col">
         <Header />
         <Component {...pageProps} />
         <Footer />

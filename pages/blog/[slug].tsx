@@ -1,42 +1,38 @@
-import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { Post } from "../../interfaces";
-import styles from "../../styles/Post.module.css";
-import Image from "next/image";
+import { MDXData, MDXPage } from "../../interfaces";
 import Layout from "../../components/Layout";
-const components = {};
+import { getMDX, getMDXData, getMDXPaths } from "../../functions/MDX";
+import Link from "next/link";
 
-export default function PostPage({ title, description, mdxSource, thumbnailUrl, tags }: Post) {
+export default function PostPage({ data, content, others }: MDXPage) {
   return (
-    <Layout
-      title={title}
-      description={description}
-      keywords={tags?.toString()}
-      top={
-        <div className={styles.topContent}>
-          <h1>{title}</h1>
-          <div>
-            <Image src={thumbnailUrl!} alt={title} layout="fill"></Image>
+    <Layout title={data.title} description={data.description} keywords={data.tags?.toString()} top={<h1>{data.title}</h1>}>
+      <div className="flex space-x-6 items-start w-full">
+        <div className="basis-3/4 mdx w-full">
+          <MDXRemote {...content} />
+        </div>
+        <div className="basis-1/4 bg-gradient-primary w-full flex flex-col items-center rounded-lg overflow-hidden">
+          <h2 className="text-xl uppercase font-bold m-4">Postitused</h2>
+          <div className="text-lg flex flex-col items-center w-full">
+            {others.map((teenus, i) => {
+              const selected = data.title === teenus.title;
+              return (
+                <Link key={i} href={`/blog/${teenus.slug}`} passHref>
+                  <p className={`border-t w-full py-2 px-4 border-black ${selected ? "font-bold" : "font-normal"} cursor-pointer hover:bg-green-400`}>
+                    {teenus.title}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </div>
-      }
-    >
-      <MDXRemote {...mdxSource} components={components} />
+      </div>
     </Layout>
-    
   );
 }
 
 export const getStaticPaths = async () => {
-  const files = fs.readdirSync(path.join("posts", "blog"));
-  const paths = files.map((filename) => ({
-    params: {
-      slug: filename.replace(".mdx", ""),
-    },
-  }));
+  const paths = getMDXPaths("posts/blog").map((p) => ({ params: { slug: p } }));
 
   return {
     paths,
@@ -44,17 +40,21 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params: { slug } }: { params: { slug: string } }): Promise<{ props: Post }> => {
-  const markdownWithMeta = fs.readFileSync(path.join("posts", "blog", slug + ".mdx"), "utf-8");
+export const getStaticProps = async ({ params: { slug } }: { params: { slug: string } }): Promise<{ props: MDXPage }> => {
+  const { data, content } = await getMDX(`posts/blog/${slug}.mdx`);
 
-  const { data: frontMatter, content } = matter(markdownWithMeta);
-  const mdxSource = await serialize(content);
-
+  const teenusedPaths = getMDXPaths(`posts/blog`);
+  const teenused = teenusedPaths
+    .map((filename) => {
+      const { data } = getMDXData(`posts/blog/${filename}.mdx`);
+      return data;
+    })
+    .sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
   return {
     props: {
-      ...frontMatter,
-      slug,
-      mdxSource,
+      data,
+      content,
+      others: teenused,
     },
   };
 };

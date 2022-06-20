@@ -1,26 +1,34 @@
+import { ContactForm } from "../components/ContactForm";
 import Layout from "../components/Layout";
-import { people } from "../consts";
-
+import { config } from "../consts";
 
 export default function Meist() {
   return (
     <Layout
       title="Meist"
       description="Oleme noor firma kuid kasvame jõudsalt tänu usaldusväärsele koostööle oma koostööpartneritega ja klientidega. Meie eesmärk on majandada metsanduses läbipaistvalt ja ausalt."
-      top={<h1>Meist</h1>}
+      top="Meist"
     >
-      <p>
-        Oleme noor firma kuid kasvame jõudsalt tänu usaldusväärsele koostööle oma koostööpartneritega ja klientidega. Meie eesmärk on majandada
-        metsanduses läbipaistvalt ja ausalt.
-      </p>
-      {people.map((person, i) => (
-        <div key={i}>
-          <h3>{person.name}</h3>
-          <p>{person.position}</p>
-          <a href={`mailto:${person.email}`}>{person.email}</a>
-          <a href={`tel:${person.email}`}>{person.phone}</a>
+      <div className="flex space-x-10">
+        <div className="flex flex-col basis-3/5 space-y-10">
+        <p className="text-xl font-bold">
+          Oleme noor firma kuid kasvame jõudsalt tänu usaldusväärsele koostööle oma koostööpartneritega ja klientidega. Meie eesmärk on majandada
+          metsanduses läbipaistvalt ja ausalt.
+        </p>
+        <div className="flex ">
+          {config.people.map((person, i) => (
+            <div key={i} className="flex flex-col items-center w-full">
+              <h3 className="font-bold text-lg">{person.name}</h3>
+              <p>{person.position}</p>
+              <a className="text-primary" href={`mailto:${person.email}`}>{person.email}</a>
+              <a className="text-primary" href={`tel:${person.email}`}>{person.phone}</a>
+            </div>
+          ))}
         </div>
-      ))}
+        
+        </div>
+        <ContactForm />
+      </div>
     </Layout>
   );
 }

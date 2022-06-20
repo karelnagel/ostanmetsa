@@ -1,10 +1,15 @@
 
-export interface Post {
+export interface MDXData {
     title?: string;
     date?: string;
     description?: string;
     thumbnailUrl?: string;
     tags?: string[];
-    slug: string;
-    mdxSource?:any;
+    position?: number;
+    slug?: string
+}
+export interface MDXPage {
+    data: MDXData;
+    content: any;
+    others: MDXData[];
 }
