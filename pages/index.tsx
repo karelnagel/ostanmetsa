@@ -1,18 +1,17 @@
 import Image from "next/image";
 import { MDXData } from "../interfaces";
 import Link from "next/link";
-import React, { useState } from "react";
-import { Button, MenuItem, TextField } from "@mui/material";
+import React from "react";
 import { getMDXData, getMDXPaths } from "../functions/MDX";
 import { ContactForm } from "../components/ContactForm";
 
 export default function Home({ posts, teenused }: { posts: MDXData[]; teenused: MDXData[] }) {
   return (
     <main className="flex flex-col space-y-20 mb-20">
-      <section className="h-[100vh] bg-main bg-cover" id="home">
+      <section className="min-h-screen bg-main bg-cover" id="home">
         <div className="bg-black h-full bg-opacity-20 flex items-center px-2">
-          <div className="max-w-screen-lg m-auto flex flex-col md:flex-row items-start pt-20 ">
-            <div className="flex flex-col  space-y-10 text-white basis-3/5 ">
+          <div className="max-w-screen-lg m-auto flex flex-col md:flex-row items-center md:items-start pt-20 justify-around h-full md:h-auto my-10">
+            <div className="flex flex-col  space-y-10 text-white md:basis-3/5 ">
               <h1 className=" text-3xl md:text-5xl font-bold ">Ostame Lõuna-Eestis kuusepalki</h1>
               <h3 className=" text-lg md:text-2xl">Teeme vastavalt sortimendi pikkusele ja läbimoodule personaalse tihumeetri hinna</h3>
             </div>
@@ -22,16 +21,16 @@ export default function Home({ posts, teenused }: { posts: MDXData[]; teenused: 
       </section>
       <section className="flex flex-col items-center m-auto max-w-screen-lg space-y-10 px-4" id="teenused">
         <h2 className="h2">Teenused</h2>
-        <div className="grid  grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-3 gap-2 md:gap-6">
           {teenused.map((teenus, i) => (
             <Link key={i} href={`/teenused/${teenus.slug}`} passHref>
-              <div className=" shadow-md rounded-lg p-4 h-56 md:h-60 md:w-60  group overflow-hidden cursor-pointer">
-                <div className="flex flex-col items-center space-y-4">
-                  <div className="relative h-40 w-40 group-hover:h-20 group-hover:w-20  duration-300 ease-in-out">
+              <div className=" shadow-md rounded-lg p-2 md:p-4 h-32 md:h-60 md:w-60  group overflow-hidden cursor-pointer">
+                <div className="flex flex-col items-center md:space-y-4">
+                  <div className="relative h-20 w-20 md:h-40 md:w-40 md:group-hover:h-20 md:group-hover:w-20  duration-300 ease-in-out">
                     <Image className="object-contain" src={teenus.thumbnailUrl!} alt={teenus.title} layout="fill"></Image>
                   </div>
-                  <h3 className="font-bold text-lg">{teenus.title}</h3>
-                  <p className="">{teenus.description}</p>
+                  <h3 className="md:font-bold md:text-lg leading-4">{teenus.title}</h3>
+                  <p className="hidden md:block">{teenus.description}</p>
                 </div>
               </div>
             </Link>

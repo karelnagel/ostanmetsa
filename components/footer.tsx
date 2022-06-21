@@ -1,12 +1,10 @@
-import logo from "./../images/logo.png";
-import Image from "next/image";
 import { config } from "../consts";
 import Link from "next/link";
 
 export function Footer() {
   return (
     <footer className="mt-auto bg-main bg-cover ">
-      <div className="bg-black bg-opacity-30 px-10 py-20 e">
+      <div className="bg-black bg-opacity-30 px-10 py-20 text-white">
         <div className="mx-auto max-w-screen-lg grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0 items-start justify-items-center text-center md:text-lg text-whit">
           <div>
             <h2 className="uppercase font-bold  text-center mb-2 md:mb-4 text-lg md:text-xl ">Meist lähemalt</h2>
