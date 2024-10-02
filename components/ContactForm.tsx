@@ -3,11 +3,13 @@ import { useState } from "react";
 
 import emailjs from "@emailjs/browser";
 
-export function ContactForm({ teenused }: { teenused?: string[] }) {
+const TEENUSED = ["Metsa ost", "Kinnistu müük", "Raieõiguse võõrandamine", "Puidu müük", "Veoteenused", "Kompleksteenus", "Metsa majandamine"];
+
+export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
-  const [teenus, setTeenus] = useState(teenused ? teenused[0] : "");
+  const [teenus, setTeenus] = useState(TEENUSED[0]);
   const [status, setStatus] = useState<"sending" | "sent" | "start">("start");
 
   const submit = async (e: any) => {
@@ -37,15 +39,13 @@ export function ContactForm({ teenused }: { teenused?: string[] }) {
           <TextField label="Sinu nimi" variant="filled" required value={name} onChange={(e) => setName(e.target.value)} />
           <TextField label="E-mail või telefoninumber" variant="filled" required value={email} onChange={(e) => setEmail(e.target.value)} />
           <TextField label="Katastrinumber / küsimus" variant="filled" required value={question} onChange={(e) => setQuestion(e.target.value)} />
-          {teenused && (
-            <TextField label="Milline teenus?" select required variant="filled" onChange={(e) => setTeenus(e.target.value)} value={teenus}>
-              {teenused.map((teenus, i) => (
-                <MenuItem key={i} value={teenus}>
-                  {teenus}
-                </MenuItem>
-              ))}
-            </TextField>
-          )}
+          <TextField label="Milline teenus?" select required variant="filled" onChange={(e) => setTeenus(e.target.value)} value={teenus}>
+            {TEENUSED.map((teenus, i) => (
+              <MenuItem key={i} value={teenus}>
+                {teenus}
+              </MenuItem>
+            ))}
+          </TextField>
           <button type="submit" className="btn">
             {status === "sending" ? "Saadan..." : "Saada"}
           </button>

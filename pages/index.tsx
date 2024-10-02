@@ -15,7 +15,7 @@ export default function Home({ posts, teenused }: { posts: MDXData[]; teenused: 
               <h1 className=" text-3xl md:text-5xl font-bold ">Ostame Lõuna-Eestis kuusepalki</h1>
               <h3 className=" text-lg md:text-2xl">Teeme vastavalt sortimendi pikkusele ja läbimoodule personaalse tihumeetri hinna</h3>
             </div>
-            <ContactForm teenused={teenused.map((t) => t.title) as string[]} />
+            <ContactForm />
           </div>
         </div>
       </section>
