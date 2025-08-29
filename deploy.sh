@@ -1,0 +1,1 @@
+yarn build && yarn export && scp -r out/. ostanmetsa:next
