@@ -12,7 +12,7 @@ export default function Blog({ posts }: { posts: MDXData[] }) {
           <Link key={i} href={`/blog/${post.slug}`} passHref>
             <div className="flex flex-col h-60 shadow-md shadow-gray-400 rounded-lg relative group overflow-hidden hover:scale-110 cursor-pointer duration-200">
               <div className="relative h-40 basis-2/3 ">
-                <Image src={post.thumbnailUrl!} alt={post.title} layout="fill" className=" object-cover rounded-t-lg"></Image>
+                <Image src={`/${post.thumbnailUrl}`} alt={post.title} layout="fill" className=" object-cover rounded-t-lg"></Image>
                 <div className="absolute bg-white h-full bg-opacity-40 text-center text-lg font-bold p-2 leading-6 invisible md:group-hover:visible">
                   <p>{post.description}</p>
                 </div>
