@@ -5,6 +5,10 @@ import emailjs from "@emailjs/browser";
 
 const TEENUSED = ["Metsa ost", "Kinnistu müük", "Raieõiguse võõrandamine", "Puidu müük", "Veoteenused", "Kompleksteenus", "Metsa majandamine"];
 
+const NEXT_PUBLIC_SERVICE_ID = "service_b8f420e";
+const NEXT_PUBLIC_TEMPLATE_ID = "ostanmetsa";
+const NEXT_PUBLIC_USER_ID = "aW073kT0d8YmT0MKN";
+
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,12 +22,7 @@ export function ContactForm() {
     if (status === "sending") return;
     setStatus("sending");
     try {
-      const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID!,
-        { name, email, question, teenus },
-        process.env.NEXT_PUBLIC_USER_ID
-      );
+      const result = await emailjs.send(NEXT_PUBLIC_SERVICE_ID!, NEXT_PUBLIC_TEMPLATE_ID!, { name, email, question, teenus }, NEXT_PUBLIC_USER_ID);
       console.log(result.text);
     } catch (e) {
       console.log(e);
