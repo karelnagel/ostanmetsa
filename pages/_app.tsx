@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import Script from "next/script";
 import { Header } from "./../components/header";
 import { Footer } from "./../components/footer";
 
@@ -35,6 +36,18 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
       </Head>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-18467244080"
+        strategy="afterInteractive"
+      />
+      <Script id="google-ads-tag" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18467244080');
+        `}
+      </Script>
       <div className="h-[100vh] w-full flex flex-col">
         <Header />
         <Component {...pageProps} />
